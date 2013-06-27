@@ -1,0 +1,11 @@
+Alright, so these are the libraries that you probably want to add to processing:
+
+GlGraphics, GSVideo, and video 
+
+This is the tutorial for the OpenCV library:
+
+http://ubaa.net/shared/processing/opencv/
+
+I tried that tutorial but it didn't work. 
+
+Also, there is library for kinect but I am not sure what it is called
