@@ -55,10 +55,11 @@ void setup() {
  
   projectedQuads = new ProjectedQuads();  
   projectedQuads.load(configFile);  
-  //we want to display 3 quads so if there was no config file
-  //or less than 3 were defined we increase number to 3
-  if (projectedQuads.getNumQuads() < 3) {
-    projectedQuads.setNumQuads(3);  
+  //we want to display n quads so if there was no config file
+  //or less than n were defined we increase number to n
+  int n = 1; //number of quads to display
+  if (projectedQuads.getNumQuads() < n) {
+    projectedQuads.setNumQuads(n);  
   }  
  
   quadImage = loadImage("checker.png");
@@ -78,10 +79,10 @@ void draw() {
   video.read();
   scale(-1,1);               //Gira el video para que sea como un espejo
   image(video, -width, 0);
-  translate(-750, 0);
+  translate(-width, 0);
   //animation code is here
+  
   quadGraphics1.beginDraw();
- 
   quadGraphics1.fill(200, 0, 120);
  
   if( circleX < 0 || circleX > quadGraphics1.width) {
@@ -89,10 +90,9 @@ void draw() {
   }
   circleX = circleX + directionX;
   quadGraphics1.ellipse(circleX, quadGraphics1.height/2, 50, 50);
- 
   quadGraphics1.endDraw();
- 
- 
+  
+  quadGraphics2.beginDraw();
   // second projected quad
   quadGraphics2.fill(whiteness);
   quadGraphics2.rect(quadGraphics2.width/2, quadGraphics2.height/2, 100, 100);
@@ -111,9 +111,6 @@ void draw() {
     whiteness = 0;
     colourSpeed = -colourSpeed;  // positive (getting brighter)
   }
- 
-  quadGraphics2.beginDraw();
- 
   quadGraphics2.endDraw();
   
  

@@ -65,16 +65,21 @@ class ProjectedQuads {
   public void load(String configFile) {
     String[] data = loadStrings(configFile);
     if (data == null) {
+      print("WARN: no quads in configFile!\n");
       return;
     }
     setNumQuads(data.length);
     for(int i=0; i<data.length; i++) {
       PVector[] points = ((Quad)quads.get(i)).getPoints();
       String[] lineArr = data[i].split(" ");
+      log("quad "+str(i)+" created with corners:\n");
       for(int j=0; j<4; j++) {
         points[j].x = parseFloat(lineArr[j*2]);
         points[j].y = parseFloat(lineArr[j*2+1]);
-      }    
+        log("\t("+str(points[j].x)+","+str(points[j].y)+")\n");
+      }
+
+          
     }
     println("ProjectedQuads loaded from: " + configFile);
   }
@@ -240,21 +245,23 @@ class ProjectedQuads {
   
   public void mousePressed() {
     log("mouse click detected; ");
+    int clickRad = 10; // size of area that selects the point if clicked
     selectedPoint = -1;
     if (selectedQuad > -1) {
       log("quad "+str(selectedQuad)+" is selected; ");
       PVector[] points = ((Quad)quads.get(selectedQuad)).getPoints();
       for(int i=0; i<4; i++) {
-        int clickRad = 10; // size of area that selects the point if clicked
         if ((Math.abs(mouseX - points[i].x) < clickRad) && (Math.abs(mouseY - points[i].y) < clickRad)) {
           selectedPoint = i;
           break;
+        } else {
+          log("\n("+str(points[i].x)+","+str(points[i].y)+") not clicked,");
         }
       }
       if (selectedPoint > -1){
         log("point "+str(selectedPoint)+" selected.");
       } else {
-        log("no point clicked.");
+        log("\n("+str(mouseX)+","+str(mouseY)+") has no point within "+str(clickRad)+"px.");
       }
     } else {
       log("no quad selected.");
@@ -282,8 +289,4 @@ class ProjectedQuads {
       }
     }
   }
-  
-  
-  
-
 }
