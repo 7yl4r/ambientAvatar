@@ -39,9 +39,8 @@ import processing.video.*;
 String configFile = "data/quadsconfig.txt";
 Capture video; 
 ProjectedQuads projectedQuads;
-PImage    quadImage;  
-PGraphics quadGraphics1;
-PGraphics quadGraphics2;
+PImage    checkered, maleFace, femaleFace;              //image textures
+PGraphics quadGraphics1, quadGraphics2; //dynamic textures
  
 int circleX;
 int directionX = 1;
@@ -57,19 +56,23 @@ void setup() {
   projectedQuads.load(configFile);  
   //we want to display n quads so if there was no config file
   //or less than n were defined we increase number to n
-  int n = 1; //number of quads to display
+  int n = 5; //number of quads to display
   if (projectedQuads.getNumQuads() < n) {
     projectedQuads.setNumQuads(n);  
   }  
  
-  quadImage = loadImage("checker.png");
-  projectedQuads.getQuad(0).setTexture(quadImage);
- 
+  // setup quad textures
+  checkered = loadImage("checker.png");
+  maleFace      = loadImage("maleFace.png");
+  femaleFace    = loadImage("femaleFace.png");
   quadGraphics1 = createGraphics(256, 256, P2D);
   quadGraphics2 = createGraphics(256, 256, P2D);
- 
+  
+  projectedQuads.getQuad(0).setTexture(maleFace);
   projectedQuads.getQuad(1).setTexture(quadGraphics1); 
   projectedQuads.getQuad(2).setTexture(quadGraphics2);
+  projectedQuads.getQuad(3).setTexture(checkered);
+  projectedQuads.getQuad(4).setTexture(checkered);
  
   // variables for our graphics
   circleX = quadGraphics1.width/2;
