@@ -239,16 +239,27 @@ class ProjectedQuads {
   }
   
   public void mousePressed() {
+    log("mouse click detected; ");
     selectedPoint = -1;
     if (selectedQuad > -1) {
+      log("quad "+str(selectedQuad)+" is selected; ");
       PVector[] points = ((Quad)quads.get(selectedQuad)).getPoints();
       for(int i=0; i<4; i++) {
-        if ((Math.abs(mouseX - points[i].x) < 10) && (Math.abs(mouseY - points[i].y) < 10)) {
+        int clickRad = 10; // size of area that selects the point if clicked
+        if ((Math.abs(mouseX - points[i].x) < clickRad) && (Math.abs(mouseY - points[i].y) < clickRad)) {
           selectedPoint = i;
           break;
         }
       }
+      if (selectedPoint > -1){
+        log("point "+str(selectedPoint)+" selected.");
+      } else {
+        log("no point clicked.");
+      }
+    } else {
+      log("no quad selected.");
     }
+    log("\n");
   }
   
   public void mouseDragged() {
