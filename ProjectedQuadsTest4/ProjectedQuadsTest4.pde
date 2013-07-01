@@ -39,8 +39,8 @@ import processing.video.*;
 String configFile = "data/quadsconfig.txt";
 Capture video; 
 ProjectedQuads projectedQuads;
-PImage    checkered, maleFace, femaleFace;              //image textures
-PGraphics quadGraphics1, quadGraphics2; //dynamic textures
+PImage    checkered, maleFace, femaleFace; //image textures
+PGraphics quadGraphics1, quadGraphics2;    //dynamic textures
  
 int circleX;
 int directionX = 1;
@@ -80,11 +80,13 @@ void setup() {
  
 void draw() {
   video.read();
+  pushMatrix();
   scale(-1,1);               //Gira el video para que sea como un espejo
   image(video, -width, 0);
   translate(-width, 0);
-  //animation code is here
+  popMatrix();
   
+  //animation code is here
   quadGraphics1.beginDraw();
   quadGraphics1.fill(200, 0, 120);
  

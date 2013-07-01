@@ -134,7 +134,7 @@ class ProjectedQuads {
         PVector center = q.getCenterPoint();
         
         fill(0, 0, 0);  
-        text("", center.x-22, center.y+22);           
+        text(str(i), center.x-22, center.y+22);           
         
         if (i == selectedQuad) {
             fill(0, 255, 0);  
@@ -143,7 +143,7 @@ class ProjectedQuads {
             fill(255, 0, 0);
         }
         
-        text("", center.x-20, center.y+20);    
+        text(str(i), center.x-20, center.y+20);    
       }
     }
     
